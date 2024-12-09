@@ -254,7 +254,7 @@ def generate_wordcloud(frequency_table, mask_array, customization_options):
     return wordcloud.to_image()
 
 def main():
-    st.title("Vietnamese Text Analysis and Word Cloud Generator")
+    st.title("Word Cloud Generator")
     
     # Sidebar: Upload Files, Filters, and Processing Options
     st.sidebar.header("Upload Files")
@@ -331,9 +331,8 @@ def main():
     # Sidebar Processing Options
     st.sidebar.header("Processing Options")
     processing_options = st.sidebar.selectbox(
-        options=["Title", "Content"],
-        placeholder="Select Columns to Process",
-        label="Content"
+        options=["Content", "Title"],
+        label="Select Columns to Process"
     )
     
     st.sidebar.header("TF-IDF Options")
