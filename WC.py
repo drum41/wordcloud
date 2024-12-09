@@ -374,8 +374,8 @@ def main():
             color_map = st.selectbox(
                 "Select Color Map",
                 options=[
-                    'viridis', 'plasma', 'inferno', 'magma', 'cividis',
-                    'Greys', 'Purples', 'Blues', 'Greens', 'Oranges',
+                    'Blues', 'viridis', 'plasma', 'inferno', 'magma', 'cividis',
+                    'Greys', 'Purples', 'Greens', 'Oranges',
                     'Reds', 'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd',
                     'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu',
                     'PuBuGn', 'BuGn', 'YlGn'
@@ -399,7 +399,7 @@ def main():
                 "Select Image Quality",
                 options=["High Quality", "Medium Quality", "Low Quality"],
                 index=1,  # Default to Medium Quality
-                help="Choose the quality of the word cloud image, which determines its dimensions."
+                help="Choose the quality of the word cloud image, which determines its dimensions. \n High Quality: 1600 x 800, Medium Quality 800 x 400}, Low Quality: 400 x 200"
             )
         
             width = quality_options[quality]["width"]
@@ -409,7 +409,7 @@ def main():
             # 4. Maximum Number of Words
             max_words = st.number_input(
                 "Maximum Number of Words",
-                value=100,
+                value=300,
                 min_value=50,
                 help="Set the maximum number of words to include in the word cloud."
             )
@@ -461,7 +461,7 @@ def main():
                 )
 
                 # File uploader widget
-                uploaded_file = st.file_uploader("Or Upload Your Own (e.g., PNG, JPG)", type=["png", "jpg", "jpeg"])
+                uploaded_file = st.file_uploader("Or Upload Your Own, avoid using transparent images", type=["png", "jpg", "jpeg"])
 
                 # Determine the image to use
                 if uploaded_file is not None:
@@ -486,7 +486,7 @@ def main():
                 add_contour = st.checkbox(
                     "Add Contour",
                     value=False,
-                    help="Add contour lines to the word cloud."
+                    help="Add contour lines to the word cloud. If selected, background color cant be transparent."
                 )
                 col4, col5 = st.columns([1,3])
 
@@ -518,7 +518,7 @@ def main():
                 # 6. Color function
                 color_function_selection = st.selectbox(
                     "Color Function",
-                    options=["Using Color Map", "Using Masked Image Color", "Customize"],
+                    options=["Using Color Map (Currently use)", "Using Masked Image Color", "Customize"],
                     index=0,
                     help="Choose the color function for the word cloud (Default = Color Map)"
                 )
