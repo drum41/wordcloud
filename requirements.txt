@@ -7,3 +7,4 @@ pyvi
 wordcloud
 scikit-learn
 openpyxl
+streamlit-image-select
