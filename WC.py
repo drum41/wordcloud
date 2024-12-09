@@ -433,7 +433,8 @@ def main():
             def extract_number(file_name):
                 match = re.search(r"\d+", file_name)
                 return int(match.group()) if match else None
-
+            def remove_numbers(file_name):
+                return re.sub(r"\d+", "", file_name).strip()
             # Sort the image paths based on the first number in the file name
             image_paths.sort(key=lambda x: (extract_number(os.path.basename(x)) is None, extract_number(os.path.basename(x))))
 
@@ -447,7 +448,7 @@ def main():
                     if img.mode == "RGBA":
                         img = img.convert("RGB")
                     images.append(img)
-                    captions.append(os.path.basename(img_path))  # Use the file name as the caption
+                    captions.append(remove_numbers(os.path.basename(img_path)))  # Use the file name as the caption
                 except Exception as e:
                     print(f"Could not load image {img_path}: {e}")
         
