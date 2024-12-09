@@ -428,8 +428,18 @@ def main():
             # Get all image file paths in the mask directory
             image_paths = glob.glob(os.path.join(mask_dir, "*"))
         
+
+            # Helper function to extract the first number in the file name
+            def extract_number(file_name):
+                match = re.search(r"\d+", file_name)
+                return int(match.group()) if match else None
+
+            # Sort the image paths based on the first number in the file name
+            image_paths.sort(key=lambda x: (extract_number(os.path.basename(x)) is None, extract_number(os.path.basename(x))))
+
             # Process images to handle RGBA mode
             images = []
+            captions = []
             for img_path in image_paths:
                 try:
                     img = Image.open(img_path)
@@ -437,11 +447,9 @@ def main():
                     if img.mode == "RGBA":
                         img = img.convert("RGB")
                     images.append(img)
+                    captions.append(os.path.basename(img_path))  # Use the file name as the caption
                 except Exception as e:
-                    st.error(f"Could not load image {img_path}: {e}")
-        
-            # Generate captions for the images
-            captions = [f"Image {i+1}" for i in range(len(images))]
+                    print(f"Could not load image {img_path}: {e}")
         
             with st.container():
                 # Display the image selection widget
