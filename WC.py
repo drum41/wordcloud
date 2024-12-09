@@ -401,7 +401,7 @@ def main():
             # 5. Contour Options
             add_contour = st.checkbox(
                 "Add Contour",
-                value=True,
+                value=False,
                 help="Add contour lines to the word cloud."
             )
             col4, col5 = st.columns([1,3])
