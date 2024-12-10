@@ -37,9 +37,9 @@ def load_excel_data(excel_file):
     Raises:
         ValueError: If required columns are missing.
     """
-    required_columns = {'Title', 'Content', 'ParentId', 'Sentiment', 'Channel'}
+    required_columns = {'Title', 'Content', 'Sentiment', 'Channel'}
     try:
-        df = pd.read_excel(excel_file)
+        df = pd.read_excel(excel_file, sheet_name = "Data")
     except Exception as e:
         raise ValueError(f"Error loading Excel file: {e}")
     
@@ -297,7 +297,7 @@ def main():
     resources_dir = os.path.join(script_dir, "resources")
 
     default_excel_file_path = os.path.join(resources_dir, "test.xlsx")
-    excel_file = st.sidebar.file_uploader("Upload Excel File", type=["xlsx", "xls"])
+    excel_file = st.sidebar.file_uploader("Upload Excel File - Sheet name = Data", type=["xlsx", "xls"])
     
     stopwords_file = os.path.join(resources_dir, "vietnamese-stopwords.txt")
     if excel_file is not None:
