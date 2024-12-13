@@ -371,18 +371,44 @@ def main():
         
         # 1. Color Map Selection
         with col1:
+                # Predefined color map options
+            color_map_options = [
+                'Blues', 'viridis', 'plasma', 'inferno', 'magma', 'cividis',
+                'Greys', 'Purples', 'Greens', 'Oranges',
+                'Reds', 'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd',
+                'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu',
+                'PuBuGn', 'BuGn', 'YlGn', 'Other'  # Add "Other" option
+            ]
+            
+            # Color map selection
             color_map = st.selectbox(
                 "Select Color Map",
-                options=[
-                    'Blues', 'viridis', 'plasma', 'inferno', 'magma', 'cividis',
-                    'Greys', 'Purples', 'Greens', 'Oranges',
-                    'Reds', 'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd',
-                    'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu',
-                    'PuBuGn', 'BuGn', 'YlGn'
-                ],
+                options=color_map_options,
                 index=0,
-                help="Choose a color scheme for the word cloud."
+                help="Choose a color scheme for the word cloud or input a custom one."
             )
+            
+            # If the user selects "Other," prompt for custom input
+            if color_map == 'Other':
+                custom_color_map = st.text_input(
+                    "Input Custom Color Map",
+                    value="",
+                    help="Specify a custom color map name (e.g., 'coolwarm')."
+                )
+            else:
+                custom_color_map = color_map
+            # color_map = st.selectbox(
+            #     "Select Color Map",
+            #     options=[
+            #         'Blues', 'viridis', 'plasma', 'inferno', 'magma', 'cividis',
+            #         'Greys', 'Purples', 'Greens', 'Oranges',
+            #         'Reds', 'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd',
+            #         'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu',
+            #         'PuBuGn', 'BuGn', 'YlGn'
+            #     ],
+            #     index=0,
+            #     help="Choose a color scheme for the word cloud."
+            # )
             quality_options = {
                 "High Quality": {"width": 1600, "height": 800},
                 "Medium Quality": {"width": 800, "height": 400},
