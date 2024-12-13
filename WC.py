@@ -387,7 +387,7 @@ def main():
                 index=0,
                 help="Choose a color scheme for the word cloud or input a custom one."
             )
-            
+        
             # If the user selects "Other," prompt for custom input
             if color_map == 'Other':
                 custom_color_map = st.text_input(
@@ -397,6 +397,19 @@ def main():
                 )
             else:
                 custom_color_map = color_map
+        
+            # Generate word cloud only if valid
+            if custom_color_map and custom_color_map != 'Other':
+                try:
+                    # Create a dummy word cloud to validate
+                    wc = WordCloud(colormap=custom_color_map)
+                    st.success(f"Word cloud will be generated with colormap: {custom_color_map}")
+                except ValueError:
+                    st.error(
+                        f"'{custom_color_map}' is not a valid colormap. Please use a supported value."
+                    )
+            else:
+                st.warning("Please select a valid color map or provide a custom one.")
             # color_map = st.selectbox(
             #     "Select Color Map",
             #     options=[
