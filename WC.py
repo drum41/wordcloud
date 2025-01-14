@@ -292,12 +292,11 @@ def main():
     
     # Sidebar: Upload Files, Filters, and Processing Options
     st.sidebar.header("Upload Files")
-    st.markdown("Required columns in data file Title, Content, Sentiment, Channel")
     script_dir = os.path.dirname(__file__)
     resources_dir = os.path.join(script_dir, "resources")
 
     default_excel_file_path = os.path.join(resources_dir, "test.xlsx")
-    excel_file = st.sidebar.file_uploader("Upload Excel File - Sheet name = Data", type=["xlsx", "xls"])
+    excel_file = st.sidebar.file_uploader("Upload Excel File from CMS - Sheet name = Data; Required columns in data file Title, Content, Sentiment, Channel" , type=["xlsx", "xls"])
     
     stopwords_file = os.path.join(resources_dir, "vietnamese-stopwords.txt")
     if excel_file is not None:
