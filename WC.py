@@ -292,7 +292,7 @@ def main():
     
     # Sidebar: Upload Files, Filters, and Processing Options
     st.sidebar.header("Upload Files")
-    
+    st.markdown("Required columns in data file Title, Content, Sentiment, Channel")
     script_dir = os.path.dirname(__file__)
     resources_dir = os.path.join(script_dir, "resources")
 
